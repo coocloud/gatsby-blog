@@ -1,50 +1,78 @@
 import React from 'react'
-import { Link, graphql } from 'gatsby'
+import {Link, graphql} from 'gatsby'
 import get from 'lodash/get'
 import Helmet from 'react-helmet'
 
 import Bio from '../components/Bio'
 import Layout from '../components/layout'
-import { rhythm } from '../utils/typography'
+import {rhythm} from '../utils/typography'
 
 class BlogIndex extends React.Component {
-  render() {
-    const siteTitle = get(this, 'props.data.site.siteMetadata.title')
-    const siteDescription = get(
-      this,
-      'props.data.site.siteMetadata.description'
-    )
-    const posts = get(this, 'props.data.allMarkdownRemark.edges')
+    render() {
+        const siteTitle = get(this, 'props.data.site.siteMetadata.title')
+        const siteDescription = get(
+            this,
+            'props.data.site.siteMetadata.description'
+        )
+        const posts = get(this, 'props.data.allMarkdownRemark.edges')
+        const prismicPages = get(this, 'props.data.allPrismicPage.edges')
+        console.log(prismicPages);
 
-    return (
-      <Layout location={this.props.location}>
-        <Helmet
-          htmlAttributes={{ lang: 'en' }}
-          meta={[{ name: 'description', content: siteDescription }]}
-          title={siteTitle}
-        />
-        <Bio />
-        {posts.map(({ node }) => {
-          const title = get(node, 'frontmatter.title') || node.fields.slug
-          return (
-            <div key={node.fields.slug}>
-              <h3
-                style={{
-                  marginBottom: rhythm(1 / 4),
-                }}
-              >
-                <Link style={{ boxShadow: 'none' }} to={node.fields.slug}>
-                  {title}
-                </Link>
-              </h3>
-              <small>{node.frontmatter.date}</small>
-              <p dangerouslySetInnerHTML={{ __html: node.excerpt }} />
-            </div>
-          )
-        })}
-      </Layout>
-    )
-  }
+        return (
+            <Layout location={this.props.location}>
+                <Helmet
+                    htmlAttributes={{lang: 'en'}}
+                    meta={[{name: 'description', content: siteDescription}]}
+                    title={siteTitle}
+                />
+                <Bio/>
+                {posts.map(({node}) => {
+                    const title = get(node, 'frontmatter.title') || node.fields.slug
+                    return (
+                        <div key={node.fields.slug}>
+                            <h3
+                                style={{
+                                    marginBottom: rhythm(1 / 4),
+                                }}
+                            >
+                                <Link style={{boxShadow: 'none'}} to={node.fields.slug}>
+                                    {title}
+                                </Link>
+                            </h3>
+                            <small>{node.frontmatter.date}</small>
+                            <p dangerouslySetInnerHTML={{__html: node.excerpt}}/>
+                        </div>
+                    )
+                })}
+
+                {prismicPages.map(({node}) => {
+                    console.log(`inside prismic pages node`);
+                    console.log(node);
+                    const title = get(node, 'data.title.text') || node.slugs[0]
+                    console.log(title);
+                    const imgUrl = node.data.image.url;
+                    console.log(imgUrl);
+                    return (
+                        <div key={node.slugs[0]}>
+                            <h3
+                                style={{
+                                    marginBottom: rhythm(1 / 4),
+                                }}
+                            >
+                                <Link style={{boxShadow: 'none'}} to={node.slugs[0]}>
+                                    {title}
+                                </Link>
+                            </h3>
+                            <small>{node.first_publication_date}</small>
+                            <p dangerouslySetInnerHTML={{__html: node.data.description.html}}/>
+                            {/*<span>{node.data.image.url}</span>*/}
+                            <img src={imgUrl} alt={node.data.title.text}/>
+                        </div>
+                    )
+                })}
+            </Layout>
+        )
+    }
 }
 
 export default BlogIndex
@@ -71,5 +99,29 @@ export const pageQuery = graphql`
         }
       }
     }
+    allPrismicPage {
+        edges {
+          node {
+            id
+            slugs
+            first_publication_date
+            data {
+              title {
+                html
+                text
+              }
+              description {
+                html
+                text
+              }
+              image {
+                alt
+                copyright
+                url
+              }
+            }
+          } 
+        }
+    }    
   }
 `

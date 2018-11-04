@@ -36,6 +36,13 @@ module.exports = {
         ],
       },
     },
+    {
+        resolve: `gatsby-source-prismic`,
+        options: {
+            repositoryName: `coocloud`,
+            accessToken: `MC5XOVRCUlJFQUFDZ0F4NXlD.77-9RC1hSe-_vV_vv73vv73vv73vv71t77-977-9emko77-977-9an0wRu-_vTDvv73vv70p77-977-977-977-9`,
+        },
+    },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
