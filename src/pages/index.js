@@ -111,7 +111,7 @@ class BlogIndex extends React.Component {
                         console.log(`primary node`);
                         console.log(primary);
                         embedBlock = primary.instagram_embed.html;
-                        embedBlock = embedBlock.replace("\//\www.instagram.com/embed.js","https://wwww.instagram.com/embed.js");
+                        embedBlock = embedBlock.replace("\//\www.instagram.com/embed.js","https://www.instagram.com/embed.js");
                     })
                     return (
                         <div key={node.slugs[0]}>
