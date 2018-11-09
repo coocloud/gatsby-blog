@@ -8,9 +8,14 @@ import Layout from '../components/layout'
 import {rhythm} from '../utils/typography'
 
 class BlogIndex extends React.Component {
-    // componentDidMount() {
-    //     window.instgrm.Embeds.process();
-    // }
+
+    componentDidMount() {
+        const script = document.createElement("script");
+        script.src = "https://www.instagram.com/embed.js";
+        script.async = true;
+        document.body.appendChild(script);
+    }
+
     componentWillMount() {
         this.loadInstagram();
     }
@@ -18,15 +23,15 @@ class BlogIndex extends React.Component {
     loadInstagram() {
         if (typeof window !== 'undefined') {
             if (!window.instgrm) {
-                const s = document.createElement('script')
-                s.async = s.defer = true
-                s.src = `https://platform.instagram.com/en_US/embeds.js`
-                s.id = 'react-instagram-embed-script'
-                s.onload = this.onLoad
-                const body = document.body
-                if (body) {
-                    body.appendChild(s)
-                }
+                // const s = document.createElement('script')
+                // s.async = s.defer = true
+                // s.src = `https://platform.instagram.com/en_US/embeds.js`
+                // s.id = 'react-instagram-embed-script'
+                // s.onload = this.onLoad
+                // const body = document.body
+                // if (body) {
+                //     body.appendChild(s)
+                // }
             }
         }
     }
@@ -111,7 +116,8 @@ class BlogIndex extends React.Component {
                         console.log(`primary node`);
                         console.log(primary);
                         embedBlock = primary.instagram_embed.html;
-                        embedBlock = embedBlock.replace("\//\www.instagram.com/embed.js","https://www.instagram.com/embed.js");
+                        // embedBlock = embedBlock.replace("\//\www.instagram.com/embed.js","https://www.instagram.com/embed.js");
+                        embedBlock = embedBlock.replace("<script async src=\"//\www.instagram.com/embed.js\"\><\/\script>","");
                     })
                     return (
                         <div key={node.slugs[0]}>
