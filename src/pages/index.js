@@ -8,6 +8,27 @@ import Layout from '../components/layout'
 import {rhythm} from '../utils/typography'
 
 class BlogIndex extends React.Component {
+    // componentDidMount() {
+    //     window.instgrm.Embeds.process();
+    // }
+    componentWillMount() {
+        this.loadInstagram();
+    }
+
+    loadInstagram() {
+        if (!window.instgrm) {
+            const s = document.createElement('script')
+            s.async = s.defer = true
+            s.src = `https://platform.instagram.com/en_US/embeds.js`
+            s.id = 'react-instagram-embed-script'
+            s.onload = this.onLoad
+            const body = document.body
+            if (body) {
+                body.appendChild(s)
+            }
+        }
+    }
+
     render() {
         const siteTitle = get(this, 'props.data.site.siteMetadata.title')
         const siteDescription = get(
@@ -88,6 +109,7 @@ class BlogIndex extends React.Component {
                         console.log(`primary node`);
                         console.log(primary);
                         embedBlock = primary.instagram_embed.html;
+                        embedBlock = embedBlock.replace("\//\www.instagram.com/embed.js","https://wwww.instagram.com/embed.js");
                     })
                     return (
                         <div key={node.slugs[0]}>
