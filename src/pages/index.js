@@ -16,7 +16,7 @@ class BlogIndex extends React.Component {
     }
 
     loadInstagram() {
-        if (window) {
+        if (typeof window !== 'undefined') {
             if (!window.instgrm) {
                 const s = document.createElement('script')
                 s.async = s.defer = true
