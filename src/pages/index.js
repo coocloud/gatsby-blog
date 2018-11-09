@@ -16,7 +16,9 @@ class BlogIndex extends React.Component {
         )
         const posts = get(this, 'props.data.allMarkdownRemark.edges')
         const prismicPages = get(this, 'props.data.allPrismicPage.edges')
+        const prismicSocialPages = get(this, 'props.data.allPrismicSocialpage.edges')
         console.log(prismicPages);
+        console.log(prismicSocialPages);
 
         return (
             <Layout location={this.props.location}>
@@ -68,6 +70,38 @@ class BlogIndex extends React.Component {
                             <p> {node.data.description.text} </p>
                             {/*<span>{node.data.image.url}</span>*/}
                             <img src={imgUrl} alt={node.data.title.text}/>
+                        </div>
+                    )
+                })}
+
+
+                {prismicSocialPages.map(({node}) => {
+                    console.log(`inside prismic social pages node`);
+                    console.log(node);
+                    const title = get(node, 'data.title.text') || node.slugs[0]
+                    console.log(title);
+                    const embedUrl = node.data.body;
+                    console.log(embedUrl);
+                    let embedBlock = "";
+
+                    embedUrl.map(({primary}) => {
+                        console.log(`primary node`);
+                        console.log(primary);
+                        embedBlock = primary.instagram_embed.html;
+                    })
+                    return (
+                        <div key={node.slugs[0]}>
+                            <h3
+                                style={{
+                                    marginBottom: rhythm(1 / 4),
+                                }}
+                            >
+                                <Link style={{boxShadow: 'none'}} to={node.slugs[0]}>
+                                    {title}
+                                </Link>
+                            </h3>
+                            <small>{node.first_publication_date}</small>
+                            <p dangerouslySetInnerHTML={{__html: embedBlock}}></p>
                         </div>
                     )
                 })}
@@ -123,6 +157,54 @@ export const pageQuery = graphql`
             }
           } 
         }
-    }    
+    }
+    allPrismicSocialpage {
+        edges {
+            node {
+            id
+            first_publication_date
+            slugs
+            data {
+            title {
+                html
+                text
+            }
+            release_date
+            author_name {
+                html
+                text
+            }
+            body {
+                id
+                children {
+                id
+                }
+                primary {
+                    instagram_embed {
+                        version
+                        title
+                        author_name
+                        author_url
+                        author_id
+                        media_id
+                        provider_name
+                        provider_url
+                        type
+                        width
+                        html
+                        thumbnail_url
+                        thumbnail_width
+                        thumbnail_height
+                        embed_url
+                    } 
+                }
+                }
+            }
+            }
+        }
+    pageInfo {
+      hasNextPage
+    }
+  }  
   }
 `
