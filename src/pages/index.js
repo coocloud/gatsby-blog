@@ -64,7 +64,8 @@ class BlogIndex extends React.Component {
                                 </Link>
                             </h3>
                             <small>{node.first_publication_date}</small>
-                            <p dangerouslySetInnerHTML={{__html: node.data.description.html}}/>
+                            <p dangerouslySetInnerHTML={{__html: node.data.description.html}}></p>
+                            <p> {node.data.description.text} </p>
                             {/*<span>{node.data.image.url}</span>*/}
                             <img src={imgUrl} alt={node.data.title.text}/>
                         </div>
