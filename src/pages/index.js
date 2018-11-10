@@ -131,7 +131,7 @@ class BlogIndex extends React.Component {
                                 </Link>
                             </h3>
                             <small>{node.first_publication_date}</small>
-                            <p dangerouslySetInnerHTML={{__html: embedBlock}}></p>
+                            {/*<p dangerouslySetInnerHTML={{__html: embedBlock}}></p>*/}
                         </div>
                     )
                 })}
