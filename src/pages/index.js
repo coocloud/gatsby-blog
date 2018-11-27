@@ -109,10 +109,11 @@ class BlogIndex extends React.Component {
                                 }}
                             >
                                 <Link style={{boxShadow: 'none'}} to={node.slugs[0]}>
-                                    {title}
+                                    {title} Social Post
                                 </Link>
                             </h3>
                             <small>{node.first_publication_date}</small>
+                            <p>Click the title to view content!</p>
                             {/*<p dangerouslySetInnerHTML={{__html: embedBlock}}></p>*/}
                         </div>
                     )

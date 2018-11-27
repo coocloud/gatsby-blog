@@ -31,7 +31,15 @@ exports.createPages = ({ graphql, actions }) => {
                   id
                 }
               }
-            }              
+            } 
+            allPrismicSocialpage {
+              edges {
+                node {
+                  id
+                  slugs
+                }
+              }
+            }                         
           }
         `
       ).then(result => {
@@ -43,6 +51,7 @@ exports.createPages = ({ graphql, actions }) => {
         // Create blog posts pages.
         const posts = result.data.allMarkdownRemark.edges;
         const prismicPosts = result.data.allPrismicPage.edges;
+        const prismicSocialPosts = result.data.allPrismicSocialpage.edges;
 
         console.log(prismicPosts);
 
@@ -72,6 +81,18 @@ exports.createPages = ({ graphql, actions }) => {
                 },
             })
         })
+
+          prismicSocialPosts.forEach(({ node }) => {
+              const slugPath = node.slugs[0];
+              createPage({
+                  path: slugPath,
+                  component: path.resolve(`./src/templates/prismic-social-post.js`),
+                  context: {
+                      slug: `${slugPath}`,
+                      nodeId: node.id,
+                  },
+              })
+          })
       })
     )
   })
