@@ -56,24 +56,6 @@ class BlogIndex extends React.Component {
                     title={siteTitle}
                 />
                 <Bio/>
-                {posts.map(({node}) => {
-                    const title = get(node, 'frontmatter.title') || node.fields.slug
-                    return (
-                        <div key={node.fields.slug}>
-                            <h3
-                                style={{
-                                    marginBottom: rhythm(1 / 4),
-                                }}
-                            >
-                                <Link style={{boxShadow: 'none'}} to={node.fields.slug}>
-                                    {title}
-                                </Link>
-                            </h3>
-                            <small>{node.frontmatter.date}</small>
-                            <p dangerouslySetInnerHTML={{__html: node.excerpt}}/>
-                        </div>
-                    )
-                })}
 
                 {prismicPages.map(({node}) => {
                     console.log(`inside prismic pages node`);
@@ -132,6 +114,25 @@ class BlogIndex extends React.Component {
                             </h3>
                             <small>{node.first_publication_date}</small>
                             {/*<p dangerouslySetInnerHTML={{__html: embedBlock}}></p>*/}
+                        </div>
+                    )
+                })}
+
+                {posts.map(({node}) => {
+                    const title = get(node, 'frontmatter.title') || node.fields.slug
+                    return (
+                        <div key={node.fields.slug}>
+                            <h3
+                                style={{
+                                    marginBottom: rhythm(1 / 4),
+                                }}
+                            >
+                                <Link style={{boxShadow: 'none'}} to={node.fields.slug}>
+                                    {title}
+                                </Link>
+                            </h3>
+                            <small>{node.frontmatter.date}</small>
+                            <p dangerouslySetInnerHTML={{__html: node.excerpt}}/>
                         </div>
                     )
                 })}
