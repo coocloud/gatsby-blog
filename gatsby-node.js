@@ -24,6 +24,14 @@ exports.createPages = ({ graphql, actions }) => {
                 }
               }
             }
+            allPrismicPage {
+              edges {
+                node {
+                  slugs
+                  id
+                }
+              }
+            }              
           }
         `
       ).then(result => {
@@ -34,6 +42,9 @@ exports.createPages = ({ graphql, actions }) => {
 
         // Create blog posts pages.
         const posts = result.data.allMarkdownRemark.edges;
+        const prismicPosts = result.data.allPrismicPage.edges;
+
+        console.log(prismicPosts);
 
         _.each(posts, (post, index) => {
           const previous = index === posts.length - 1 ? null : posts[index + 1].node;
@@ -49,12 +60,25 @@ exports.createPages = ({ graphql, actions }) => {
             },
           })
         })
+
+          prismicPosts.forEach(({ node }) => {
+            const slugPath = node.slugs[0];
+            createPage({
+                path: slugPath,
+                component: path.resolve(`./src/templates/prismic-post.js`),
+                context: {
+                    slug: `${slugPath}`,
+                    nodeId: node.id,
+                },
+            })
+        })
       })
     )
   })
 }
 
 exports.onCreateNode = ({ node, actions, getNode }) => {
+  // console.log(node.internal.type);
   const { createNodeField } = actions
 
   if (node.internal.type === `MarkdownRemark`) {
@@ -66,3 +90,4 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
     })
   }
 }
+
