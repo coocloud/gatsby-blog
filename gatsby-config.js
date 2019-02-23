@@ -1,9 +1,10 @@
 module.exports = {
   siteMetadata: {
-    title: 'The Blog',
+    title: 'Blogs Apps Innovative Ideas',
     author: 'coocloud',
-    description: 'Some random blog.',
-    siteUrl: 'https://gatsbyjs.github.io/gatsby-starter-blog/',
+    description: 'All about coocloud | Build Apps | coocloud',
+    siteUrl: 'https://www.coocloud.co.za',
+    googlekey: 'cMeWysQFe9S3GdwuRxRvPk2M_DKWb3abq-CP6OhRH3U',
   },
   pathPrefix: '/gatsby-starter-blog',
   plugins: [

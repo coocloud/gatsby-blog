@@ -42,17 +42,17 @@ class BlogIndex extends React.Component {
             this,
             'props.data.site.siteMetadata.description'
         )
+        const googleverify = get(this, 'props.data.site.siteMetadata.googlekey')
         const posts = get(this, 'props.data.allMarkdownRemark.edges')
         const prismicPages = get(this, 'props.data.allPrismicPage.edges')
         const prismicSocialPages = get(this, 'props.data.allPrismicSocialpage.edges')
         console.log(prismicPages);
         console.log(prismicSocialPages);
-
         return (
             <Layout location={this.props.location}>
                 <Helmet
                     htmlAttributes={{lang: 'en'}}
-                    meta={[{name: 'description', content: siteDescription}]}
+                    meta={[{name: 'description', content: siteDescription},{name: 'google-site-verification', content: googleverify}]}
                     title={siteTitle}
                 />
                 <Bio/>
