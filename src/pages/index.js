@@ -150,6 +150,7 @@ export const pageQuery = graphql`
       siteMetadata {
         title
         description
+        googlekey
       }
     }
     allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
