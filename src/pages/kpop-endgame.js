@@ -62,8 +62,8 @@ const KpopEndgame = () => (
                         <a href="https://www.instagram.com/tiffanyyoungofficial/"
                            className="db link dim tc">
                             <img
-                                src="http://images5.fanpop.com/image/photos/26100000/Tiffany-in-Run-Devil-Run-MV-tiffany-girls-generation-26194320-500-282.jpg"
-                                alt="Tiffany Young" className="w-100 db outline black-10"/>
+                                src="https://img00.deviantart.net/d7fa/i/2012/100/4/9/girls_generation_snsd_run_devil_run_tiffany_01_by_rundevilrunjs-d4vnvm8.jpg"
+                                alt="Tiffany Young Deviantart" className="w-100 db outline black-10"/>
                             <dl className="mt2 f6 lh-copy">
                                 <dt className="clip">Title</dt>
                                 <dd className="ml0 black truncate w-100">SNSD</dd>
@@ -104,8 +104,8 @@ const KpopEndgame = () => (
                         <a href="https://www.instagram.com/yulyulk/"
                            className="db link dim tc">
                             <img
-                                src="http://asianwiki.com/images/4/49/Kwon_Yuri-p01.jpg"
-                                alt="Yuri AsianWiki" className="w-100 db outline black-10"/>
+                                src="https://koreaboo-cdn.storage.googleapis.com/2015/09/SNSD_Yuri-UrbanDecay.jpg"
+                                alt="Yuri Koreaboo" className="w-100 db outline black-10"/>
                             <dl className="mt2 f6 lh-copy">
                                 <dt className="clip">Title</dt>
                                 <dd className="ml0 black truncate w-100">SNSD</dd>
