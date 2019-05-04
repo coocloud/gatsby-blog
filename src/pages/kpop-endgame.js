@@ -1,9 +1,20 @@
 import React from 'react'
 import Tachyons from "../components/tachyons"
 
-import html2canvas from 'html2canvas';
+// import html2canvas from 'html2canvas';
 
 class KpopEndgame extends React.Component {
+
+    componentDidMount() {
+        this.setState({
+            html2canvas: require('html2canvas')
+        });
+        // import('html2canvas').then((html2canvas) => {
+        //     this.setState({
+        //         html2canvas
+        //     })
+        // }).catch(console.error);
+    }
 
     constructor(props) {
         super(props);
@@ -11,7 +22,8 @@ class KpopEndgame extends React.Component {
             clicked: false,
             DEBUG: false,
             REPETITION_COUNT: 2,
-            NUM_FRAMES: 120
+            NUM_FRAMES: 120,
+            html2canvas: null
         };
     }
 
@@ -91,6 +103,7 @@ class KpopEndgame extends React.Component {
     }
 
     disintegrate3($elm) {
+        const { html2canvas } = this.state;
         // original code from https://jsfiddle.net/or20wx3h/
         html2canvas($elm).then($canvas => {
             const ctx = $canvas.getContext("2d");
@@ -145,6 +158,7 @@ rotate(${15 * (Math.random() - 0.5)}deg)`;
     }
 
     disintegrate2($elm) {
+        const { html2canvas } = this.state;
         const {DEBUG, NUM_FRAMES} = this.state;
         html2canvas($elm).then($canvas => {
             // create the container we'll use to replace the element with
