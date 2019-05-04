@@ -24,6 +24,7 @@
     "gatsby-source-prismic": "^2.1.0",
     "gatsby-transformer-remark": "^2.1.11",
     "gatsby-transformer-sharp": "^2.1.7",
+    "html2canvas": "^1.0.0-rc.1",
     "lodash": "^4.17.11",
     "prismjs": "^1.15.0",
     "react": "^16.6.0",
