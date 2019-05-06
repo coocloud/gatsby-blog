@@ -97,8 +97,9 @@ class KpopEndgame extends React.Component {
             //     disintegrate2();
             // });
             // this.disintegrate2(artist);
-            setTimeout(() => this.disintegrate3(artist), i * 20);
-            i += 1;
+            // setTimeout(() => this.disintegrate3(artist), i * 20);
+            // i += 1;
+            this.disintegrate3(artist);
         });
 
     }
