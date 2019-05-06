@@ -372,3 +372,7 @@
     color: #007acc;
     font-weight: bold;
 }
+
+a.db.link.dim.tc > img {
+    object-fit: cover;
+}
