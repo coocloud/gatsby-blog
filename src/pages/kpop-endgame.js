@@ -165,9 +165,9 @@ class KpopEndgame extends React.Component {
         }
 
         if (window_width <= 900) {
-            $elm.style.position = 'relative';
-            $elm.style.top = window.innerHeight + 'px';
-            $elm.style.left = 0;
+            // $elm.style.position = 'relative';
+            // $elm.style.top = window.innerHeight + 'px';
+            // $elm.style.left = 0;
             frameIter = 8;
         }
 
@@ -178,9 +178,9 @@ class KpopEndgame extends React.Component {
         }).then($canvas => {
 
             if (window_width <= 900) {
-                $elm.style.position = 'absolute';
-                $elm.style.top = 0;
-                $elm.style.left = "-9999px";
+                // $elm.style.position = 'absolute';
+                // $elm.style.top = 0;
+                // $elm.style.left = "-9999px";
             }
 
             const ctx = $canvas.getContext("2d");
