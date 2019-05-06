@@ -367,3 +367,8 @@
         padding-right: 8rem;
     }
 }
+
+.gauntlet-text {
+    color: #007acc;
+    font-weight: bold;
+}

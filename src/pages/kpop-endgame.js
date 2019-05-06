@@ -24,7 +24,9 @@ class KpopEndgame extends React.Component {
             DEBUG: false,
             REPETITION_COUNT: 2,
             NUM_FRAMES: 120,
-            html2canvas: null
+            html2canvas: null,
+            ALL_ARTIST_COUNT: 33,
+            gauntletUsageText: "Click the gauntlet and slowly scroll down"
         };
     }
 
@@ -68,14 +70,31 @@ class KpopEndgame extends React.Component {
         let {clicked} = this.state;
         console.log("Disintegrate: ", event);
         console.log(clicked);
-        if (clicked) {
-            console.log('Already Disintegrated');
-        } else {
+        // this.disintegrate();
+        this.setState({
+            clicked: true
+        });
+        let myIntervalFunction = setInterval(() => {
+            let { ALL_ARTIST_COUNT } = this.state;
+            console.log('set interval');
             this.disintegrate();
-            this.setState({
-                clicked: true
-            })
-        }
+            let disintegratedArtistsCount = document.querySelectorAll(".disintegrated").length;
+            console.log(ALL_ARTIST_COUNT, disintegratedArtistsCount);
+            if (disintegratedArtistsCount >= ALL_ARTIST_COUNT) {
+                clearInterval(myIntervalFunction);
+                this.setState({
+                    gauntletUsageText: "Can someone bring them all back? 😔"
+                });
+            }
+        }, 1000);
+        // if (clicked) {
+        //     console.log('Already Disintegrated');
+        // } else {
+        //     this.disintegrate();
+        //     this.setState({
+        //         clicked: true
+        //     })
+        // }
     }
 
     replaceElementVisually($old, $new) {
@@ -99,9 +118,37 @@ class KpopEndgame extends React.Component {
             // this.disintegrate2(artist);
             // setTimeout(() => this.disintegrate3(artist), i * 20);
             // i += 1;
-            this.disintegrate3(artist);
+            // console.log(artist);
+            if (this.isInViewport(artist)) {
+                if (artist.classList.contains("disintegrated") || artist.classList.contains("busy")) {
+                    console.log("element already disintegrated");
+                } else {
+                    this.disintegrate3(artist);
+                    artist.classList.add("busy");
+                }
+            }
         });
+    }
 
+    setIntervalDisintegrate() {
+        console.log("set interval");
+        let {clicked} = this.state;
+        if (clicked) {
+            this.disintegrate();
+        }
+    }
+
+    isInViewport(elem) {
+        if (window) {
+            var bounding = elem.getBoundingClientRect();
+            return (
+                bounding.top >= 0 &&
+                bounding.left >= 0 &&
+                bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                bounding.right <= (window.innerWidth || document.documentElement.clientWidth)
+            );
+        }
+        return false;
     }
 
     disintegrate3($elm) {
@@ -200,6 +247,7 @@ rotate(${15 * (Math.random() - 0.5)}deg)`;
     render() {
         const siteTitle = 'Kpop Endgame | coocloud'
         const siteDescription = 'List of kpop artists who managed to survive the SNAP';
+        // let { gauntletUsageText } = this.state;
         return (
             <React.Fragment>
                 <header><Helmet
@@ -218,6 +266,7 @@ rotate(${15 * (Math.random() - 0.5)}deg)`;
                                      alt="Google's Thanos infinity gauntlet"
                                 />
                             </p>
+                            <span className="gauntlet-text">{this.state.gauntletUsageText}</span>
                         </div>
                     </section>
 
