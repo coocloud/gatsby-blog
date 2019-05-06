@@ -154,14 +154,42 @@ class KpopEndgame extends React.Component {
     disintegrate3($elm) {
         const {html2canvas} = this.state;
         // original code from https://jsfiddle.net/or20wx3h/
-        html2canvas($elm).then($canvas => {
+        var useWidth = $elm.style.width;
+        var useHeight = $elm.style.height;
+        let frameIter = 32;
+
+        let window_width = 900;
+        if (window) {
+            console.log(window.screen.width);
+            window_width = window.screen.width;
+        }
+
+        if (window_width <= 900) {
+            $elm.style.position = 'relative';
+            $elm.style.top = window.innerHeight + 'px';
+            $elm.style.left = 0;
+            frameIter = 8;
+        }
+
+
+        html2canvas($elm, {
+            width: useWidth,
+            height: useHeight,
+        }).then($canvas => {
+
+            if (window_width <= 900) {
+                $elm.style.position = 'absolute';
+                $elm.style.top = 0;
+                $elm.style.left = "-9999px";
+            }
+
             const ctx = $canvas.getContext("2d");
             const {width, height} = $canvas;
             const originalFrame = ctx.getImageData(0, 0, width, height);
 
             // generate our frames
             const frames = [];
-            for (let i = 0; i < 32; ++i) {
+            for (let i = 0; i < frameIter; ++i) {
                 frames[i] = ctx.createImageData(width, height);
             }
             for (let x = 0; x < width; ++x) {
@@ -247,12 +275,14 @@ rotate(${15 * (Math.random() - 0.5)}deg)`;
     render() {
         const siteTitle = 'Kpop Endgame | coocloud'
         const siteDescription = 'List of kpop artists who managed to survive the SNAP';
+        const viewportDescription = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0';
         // let { gauntletUsageText } = this.state;
         return (
             <React.Fragment>
                 <header><Helmet
                     htmlAttributes={{lang: 'en'}}
                     meta={[{name: 'description', content: siteDescription}]}
+                    meta={[{name: 'viewport', content: viewportDescription}]}
                     title={`${siteTitle}`}
                 /></header>
 
