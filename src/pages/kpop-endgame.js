@@ -195,7 +195,7 @@ class KpopEndgame extends React.Component {
             for (let x = 0; x < width; ++x) {
                 for (let y = 0; y < height; ++y) {
                     for (let l = 0; l < 2; ++l) {
-                        var frameIndex = Math.floor(32 * (Math.random() + 2 * x / width) / 3);
+                        var frameIndex = Math.floor(frameIter * (Math.random() + 2 * x / width) / 3);
                         var pixelIndex = 4 * (y * width + x);
                         for (let channelOffset = 0; 4 > channelOffset; ++channelOffset) {
                             frames[frameIndex].data[pixelIndex + channelOffset]
