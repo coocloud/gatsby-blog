@@ -81,7 +81,7 @@ class KpopEndgame extends React.Component {
             let disintegratedArtistsCount = document.querySelectorAll(".disintegrated").length;
             console.log(ALL_ARTIST_COUNT, disintegratedArtistsCount);
             if (disintegratedArtistsCount >= ALL_ARTIST_COUNT) {
-                clearInterval(myTimeoutFunction);
+                clearTimeout(myTimeoutFunction);
                 this.setState({
                     gauntletUsageText: "Can someone bring them all back? 😔"
                 });
