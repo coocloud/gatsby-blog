@@ -76,7 +76,7 @@ class KpopEndgame extends React.Component {
         });
         let myTimeoutFunction = setTimeout(() => {
             let { ALL_ARTIST_COUNT } = this.state;
-            console.log('set interval');
+            console.log('set timeout');
             this.disintegrate();
             let disintegratedArtistsCount = document.querySelectorAll(".disintegrated").length;
             console.log(ALL_ARTIST_COUNT, disintegratedArtistsCount);
