@@ -136,7 +136,7 @@ class KpopEndgame extends React.Component {
             // setTimeout(() => this.disintegrate3(artist), i * 20);
             // i += 1;
             // console.log(artist);
-            if (this.isInViewport(artist)) {
+            if (this.isInOrPastViewport(artist)) {
                 if (artist.classList.contains("disintegrated") || artist.classList.contains("busy")) {
                     console.log("element already disintegrated");
                 } else {
@@ -155,9 +155,15 @@ class KpopEndgame extends React.Component {
         }
     }
 
-    isInViewport(elem) {
+    isInOrPastViewport(elem) {
         if (window) {
             var bounding = elem.getBoundingClientRect();
+            if (bounding.top < 0) {
+                return (
+                    bounding.left >= 0 &&
+                    bounding.right <= (window.innerWidth || document.documentElement.clientWidth)
+                );
+            }
             return (
                 bounding.top >= 0 &&
                 bounding.left >= 0 &&
