@@ -74,19 +74,36 @@ class KpopEndgame extends React.Component {
         this.setState({
             clicked: true
         });
-        let myTimeoutFunction = setTimeout(() => {
-            let { ALL_ARTIST_COUNT } = this.state;
+        var that = this;
+        let myTimeoutFunction = setTimeout(function timeoutcallback() {
+            let { ALL_ARTIST_COUNT } = that.state;
             console.log('set timeout');
-            this.disintegrate();
+            that.disintegrate();
+            // let disintegratedArtistsCount = document.querySelectorAll(".disintegrated").length;
+            // console.log(ALL_ARTIST_COUNT, disintegratedArtistsCount);
+            // if (disintegratedArtistsCount >= ALL_ARTIST_COUNT) {
+            //     clearTimeout(myTimeoutFunction);
+            //     that.setState({
+            //         gauntletUsageText: "Can someone bring them all back? 😔"
+            //     });
+            // }
+            myTimeoutFunction = setTimeout(timeoutcallback, 250);
+        }, 0);
+
+        let myIntervalFunction = setInterval(() => {
+            let { ALL_ARTIST_COUNT } = this.state;
+            console.log('set interval');
             let disintegratedArtistsCount = document.querySelectorAll(".disintegrated").length;
             console.log(ALL_ARTIST_COUNT, disintegratedArtistsCount);
-            if (disintegratedArtistsCount >= ALL_ARTIST_COUNT) {
+            if (disintegratedArtistsCount >= 33) {
                 clearTimeout(myTimeoutFunction);
+                clearInterval(myIntervalFunction);
                 this.setState({
                     gauntletUsageText: "Can someone bring them all back? 😔"
                 });
             }
-        }, 250);
+        }, 2000);
+
         // if (clicked) {
         //     console.log('Already Disintegrated');
         // } else {
