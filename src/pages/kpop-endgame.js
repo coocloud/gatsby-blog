@@ -321,6 +321,7 @@ rotate(${15 * (Math.random() - 0.5)}deg)`;
                             </p>
                             <span className="gauntlet-text">{this.state.gauntletUsageText}</span>
                         </div>
+                        <p>Missing artists/groups? send through recommendations on the <a href="https://slack.coocloud.co.za/">kpop-endgame slack channel</a></p>
                     </section>
 
                     <Tachyons>
