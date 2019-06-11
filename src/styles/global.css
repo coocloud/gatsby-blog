@@ -376,3 +376,8 @@
 a.db.link.dim.tc > img {
     object-fit: cover;
 }
+
+input[type=file]{
+    padding:10px;
+    background:#3498DB;
+}
