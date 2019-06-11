@@ -15,7 +15,8 @@ class CatsDogsDetector extends React.Component {
             clicked: false,
             file: null,
             model: null,
-            output: 'result'
+            output: 'loading model',
+            load: true
         };
         this.handleChange = this.handleChange.bind(this)
     }
@@ -26,7 +27,8 @@ class CatsDogsDetector extends React.Component {
         const model = await tf.loadLayersModel(MODEL_URL);
         console.log("model loaded");
         this.setState({
-            model
+            model,
+            load: false
         })
     }
 
@@ -92,7 +94,7 @@ class CatsDogsDetector extends React.Component {
                         <img id="myImage" src={this.state.file} alt="Image to predict"/>
                     </div>
                     <div>
-                        <button className="predictButton" onClick={(e) => this.predict(e)}>Predict</button>
+                        <button disabled={this.state.load} className="predictButton" onClick={(e) => this.predict(e)}>Predict</button>
                     </div>
                     <div>
                         <span>{this.state.output}</span>

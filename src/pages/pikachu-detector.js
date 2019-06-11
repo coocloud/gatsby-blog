@@ -18,7 +18,7 @@ class PikachuDetector extends React.Component {
             clicked: false,
             file: null,
             model: null,
-            output: 'result'
+            output: 'loading model'
         };
         this.handleChange = this.handleChange.bind(this)
     }
