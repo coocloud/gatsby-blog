@@ -18,14 +18,16 @@ class PikachuDetector extends React.Component {
             clicked: false,
             file: null,
             model: null,
-            output: 'loading model'
+            output: 'loading model',
+            load: true
         };
         this.handleChange = this.handleChange.bind(this)
     }
 
     async loadModel() {
         // const MODEL_URL = 'http://localhost:8000/model.json';
-        const MODEL_URL = 'https://www.coocloud.co.za/model.json';
+        // const MODEL_URL = 'https://www.coocloud.co.za/model.json';
+        const MODEL_URL = 'model.json';
 
         // const model = await loadGraphModel(MODEL_URL);
         const model = await tf.loadLayersModel(MODEL_URL);
@@ -36,7 +38,9 @@ class PikachuDetector extends React.Component {
         console.log(model);
         console.log("model loaded");
         this.setState({
-            model
+            model,
+            load: false,
+            output: 'model loaded'
         })
         // const pika = document.getElementById('imageFile');
         // model.execute(tf.fromPixels(pika));
@@ -115,7 +119,7 @@ class PikachuDetector extends React.Component {
                         <img id="myImage" src={this.state.file} alt="Image to predict"/>
                     </div>
                     <div>
-                        <button className="predictButton" onClick={(e) => this.predict(e)}>Predict</button>
+                        <button disabled={this.state.load} className="predictButton" onClick={(e) => this.predict(e)}>Predict</button>
                     </div>
                     <div>
                         <span>{this.state.output}</span>

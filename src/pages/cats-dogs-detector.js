@@ -23,12 +23,14 @@ class CatsDogsDetector extends React.Component {
 
     async loadModel() {
         // const MODEL_URL = 'http://localhost:8000/catsdogs/cdmodel.json';
-        const MODEL_URL = 'https://www.coocloud.co.za/catsdogs/cdmodel.json';
+        // const MODEL_URL = 'https://www.coocloud.co.za/catsdogs/cdmodel.json';
+        const MODEL_URL = 'catsdogs/cdmodel.json';
         const model = await tf.loadLayersModel(MODEL_URL);
         console.log("model loaded");
         this.setState({
             model,
-            load: false
+            load: false,
+            output: 'model loaded'
         })
     }
 
