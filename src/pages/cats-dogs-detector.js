@@ -2,6 +2,7 @@ import React from 'react'
 import Helmet from 'react-helmet'
 import * as tf from '@tensorflow/tfjs';
 import {loadGraphModel} from '@tensorflow/tfjs-converter';
+import cdmodel from '../assets/catsdogs/cdmodel.json';
 
 class CatsDogsDetector extends React.Component {
 
@@ -24,8 +25,9 @@ class CatsDogsDetector extends React.Component {
     async loadModel() {
         // const MODEL_URL = 'http://localhost:8000/catsdogs/cdmodel.json';
         // const MODEL_URL = 'https://www.coocloud.co.za/catsdogs/cdmodel.json';
-        const MODEL_URL = 'catsdogs/cdmodel.json';
-        const model = await tf.loadLayersModel(MODEL_URL);
+        // const MODEL_URL = cdmodel;
+        // const model = await tf.loadLayersModel(MODEL_URL);
+        const model = await tf.loadLayersModel(cdmodel);
         console.log("model loaded");
         this.setState({
             model,
