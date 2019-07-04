@@ -43,7 +43,7 @@ class BlogIndex extends React.Component {
             'props.data.site.siteMetadata.description'
         )
         const googleverify = get(this, 'props.data.site.siteMetadata.googlekey')
-        // const posts = get(this, 'props.data.allMarkdownRemark.edges')
+        const posts = get(this, 'props.data.allMarkdownRemark.edges')
         const prismicPages = get(this, 'props.data.allPrismicPage.edges')
         const prismicSocialPages = get(this, 'props.data.allPrismicSocialpage.edges')
         console.log(prismicPages);
@@ -119,24 +119,24 @@ class BlogIndex extends React.Component {
                     )
                 })}
 
-                {/*{posts.map(({node}) => {*/}
-                {/*    const title = get(node, 'frontmatter.title') || node.fields.slug*/}
-                {/*    return (*/}
-                {/*        <div key={node.fields.slug}>*/}
-                {/*            <h3*/}
-                {/*                style={{*/}
-                {/*                    marginBottom: rhythm(1 / 4),*/}
-                {/*                }}*/}
-                {/*            >*/}
-                {/*                <Link style={{boxShadow: 'none'}} to={node.fields.slug}>*/}
-                {/*                    {title}*/}
-                {/*                </Link>*/}
-                {/*            </h3>*/}
-                {/*            <small>{node.frontmatter.date}</small>*/}
-                {/*            <p dangerouslySetInnerHTML={{__html: node.excerpt}}/>*/}
-                {/*        </div>*/}
-                {/*    )*/}
-                {/*})}*/}
+                {posts.map(({node}) => {
+                    const title = get(node, 'frontmatter.title') || node.fields.slug
+                    return (
+                        <div key={node.fields.slug}>
+                            <h3
+                                style={{
+                                    marginBottom: rhythm(1 / 4),
+                                }}
+                            >
+                                <Link style={{boxShadow: 'none'}} to={node.fields.slug}>
+                                    {title}
+                                </Link>
+                            </h3>
+                            <small>{node.frontmatter.date}</small>
+                            <p dangerouslySetInnerHTML={{__html: node.excerpt}}/>
+                        </div>
+                    )
+                })}
             </Layout>
         )
     }
