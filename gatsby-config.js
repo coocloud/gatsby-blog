@@ -56,8 +56,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Gatsby Starter Blog`,
-        short_name: `GatsbyJS`,
+        name: `coocloud Blog`,
+        short_name: `coocloud`,
         start_url: `/`,
         background_color: `#ffffff`,
         theme_color: `#663399`,
